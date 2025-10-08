@@ -3,12 +3,15 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"user-service/internal/handlers"
 )
 
 func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Hello, World!")
+		fmt.Fprintf(w, "Welcome to the User Service!")
 	})
+
+	http.HandleFunc("/api/v1/users/", handlers.GetUserByID)
 
 	fmt.Println("Server starting on port 8080...")
 	if err := http.ListenAndServe(":8080", nil); err != nil {
